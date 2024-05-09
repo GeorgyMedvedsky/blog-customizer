@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
+import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
@@ -13,19 +13,31 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	const [articleParams, setArticleParams] = useState({
+		fontFamily: defaultArticleState.fontFamilyOption,
+		fontSize: defaultArticleState.fontSizeOption,
+		fontColor: defaultArticleState.fontColor,
+		backgroundColor: defaultArticleState.backgroundColor,
+		contentWidth: defaultArticleState.contentWidth,
+	});
+
 	return (
 		<div
 			className={clsx(styles.main)}
 			style={
 				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
+					'--font-family': articleParams.fontFamily.value,
+					'--font-size': articleParams.fontSize.value,
+					'--font-color': articleParams.fontColor.value,
+					'--bg-color': articleParams.backgroundColor.value,
+					'--container-width': articleParams.contentWidth.value,
 				} as CSSProperties
 			}>
-			<ArticleParamsForm />
+			{/* TODO: Transition */}
+			<ArticleParamsForm
+				articleParams={articleParams}
+				setArticleParams={setArticleParams}
+			/>
 			<Article />
 		</div>
 	);
