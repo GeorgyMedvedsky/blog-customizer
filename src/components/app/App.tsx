@@ -1,10 +1,7 @@
 import { CSSProperties, useState } from 'react';
-import clsx from 'clsx';
-
 import { ArticleParamsForm } from '../article-params-form';
 import { Article } from '../article';
 import { defaultArticleState } from 'src/constants/articleProps';
-
 import styles from './index.module.scss';
 
 const App = () => {
@@ -12,7 +9,7 @@ const App = () => {
 
 	return (
 		<div
-			className={clsx(styles.main)}
+			className={styles.main}
 			style={
 				{
 					'--font-family': articleParams.fontFamily.value,
@@ -22,7 +19,7 @@ const App = () => {
 					'--container-width': articleParams.contentWidth.value,
 				} as CSSProperties
 			}>
-			{/* TODO: Transition */}
+
 			<ArticleParamsForm
 				articleParams={articleParams}
 				setArticleParams={setArticleParams}
