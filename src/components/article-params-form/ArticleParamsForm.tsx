@@ -36,15 +36,7 @@ type TArticleParams = {
 
 type ArticleParamsFormProps = {
 	articleParams: TArticleParams;
-	setArticleParams: React.Dispatch<
-		React.SetStateAction<{
-			fontFamily: OptionType;
-			fontSize: OptionType;
-			fontColor: OptionType;
-			backgroundColor: OptionType;
-			contentWidth: OptionType;
-		}>
-	>;
+	setArticleParams: (props: TArticleParams) => void;
 };
 
 export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
@@ -52,13 +44,7 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 	setArticleParams,
 }) => {
 	const [visible, setVisible] = useState(false);
-	const [articleParamsForm, setArticleParamsForm] = useState({
-		fontFamily: articleParams.fontFamily,
-		fontSize: articleParams.fontSize,
-		fontColor: articleParams.fontColor,
-		backgroundColor: articleParams.backgroundColor,
-		contentWidth: articleParams.contentWidth,
-	});
+	const [articleParamsForm, setArticleParamsForm] = useState(articleParams);
 
 	const handleToggleVisible = () => {
 		setVisible(!visible);
@@ -70,33 +56,15 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 			[paramName]: option,
 		}));
 	};
-	// REF
+
 	const handleResetForm = () => {
-		setArticleParamsForm({
-			fontFamily: defaultArticleState.fontFamilyOption,
-			fontSize: defaultArticleState.fontSizeOption,
-			fontColor: defaultArticleState.fontColor,
-			backgroundColor: defaultArticleState.backgroundColor,
-			contentWidth: defaultArticleState.contentWidth,
-		});
-		setArticleParams({
-			fontFamily: defaultArticleState.fontFamilyOption,
-			fontSize: defaultArticleState.fontSizeOption,
-			fontColor: defaultArticleState.fontColor,
-			backgroundColor: defaultArticleState.backgroundColor,
-			contentWidth: defaultArticleState.contentWidth,
-		});
+		setArticleParamsForm(defaultArticleState);
+		setArticleParams(defaultArticleState);
 	};
 
 	const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setArticleParams({
-			fontFamily: articleParamsForm.fontFamily,
-			fontSize: articleParamsForm.fontSize,
-			fontColor: articleParamsForm.fontColor,
-			backgroundColor: articleParamsForm.backgroundColor,
-			contentWidth: articleParamsForm.contentWidth,
-		});
+		setArticleParams(articleParamsForm);
 	};
 
 	return (
