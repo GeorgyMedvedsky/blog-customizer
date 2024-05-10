@@ -2,7 +2,7 @@ import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
 
 import styles from './ArticleParamsForm.module.scss';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Text } from '../text';
 import { Select } from '../select';
@@ -17,6 +17,7 @@ import {
 } from 'src/constants/articleProps';
 import { RadioGroup } from '../radio-group';
 import { Separator } from '../separator';
+import { useClickOutside } from 'src/hooks/useClickOutside';
 
 enum articleParamsKeys {
 	FONT_FAMILY = 'fontFamily',
@@ -45,6 +46,8 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 }) => {
 	const [visible, setVisible] = useState(false);
 	const [articleParamsForm, setArticleParamsForm] = useState(articleParams);
+	const asideRef = useRef(null);
+	useClickOutside(asideRef, () => {setVisible(false)});
 
 	const handleToggleVisible = () => {
 		setVisible(!visible);
@@ -72,9 +75,10 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 			<ArrowButton state={visible} handleClick={handleToggleVisible} />
 			{visible && (
 				<aside
+					ref = {asideRef}
 					className={clsx(styles.container, {
 						[styles.container_open]: visible,
-					})}>
+				})}>
 					<form className={styles.form} onSubmit={handleSubmitForm}>
 						<Text as={'h2'} size={31} weight={800} uppercase={true}>
 							Задайте параметры
