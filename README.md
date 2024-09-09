@@ -2,6 +2,15 @@
 
 [Макет проекта](https://www.figma.com/file/FEeiiGLOsE7ktXbPpBxYoD/Custom-dropdown?type=design&node-id=0%3A1&mode=design&t=eXRJnWC6Xsuw0qR4-1)
 
+## Используемые технологии
+
+  * React
+  * JSX
+  * Storybook
+  * TypeScript
+  * Webpack
+  * Styled Component
+
 ## Установка и запуск
 Для установки и запуска проекта необходимо выполнить команды
 ```
